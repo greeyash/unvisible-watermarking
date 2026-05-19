@@ -1,4 +1,4 @@
-# Watermarking — Evaluasi Ketahanan terhadap Kompresi JPEG
+# Watermarking
 
 Mata Kuliah: Sistem Multimedia
 
@@ -46,6 +46,7 @@ Foto wajah dibuka lalu dikonversi ke mode **grayscale** (hitam-putih) menggunaka
 
 ```
 Output: output_step2_gambar_asli.png
+![Gambar Asli Grayscale](output/output_step2_gambar_asli.png)
 ```
 
 Kenapa grayscale? Karena watermarking LSB bekerja pada satu channel piksel. Foto berwarna (RGB) punya 3 channel, kalau dipakai semua jadi lebih kompleks — untuk praktikum ini cukup grayscale.
@@ -57,6 +58,7 @@ Dibuat sebuah array 64×64 pixel berisi nilai **0 dan 1** secara acak menggunaka
 
 ```
 Output: output_step3_watermark.png
+![Watermarking Biner](output/output_step3_watermark.png)
 ```
 
 Watermark ini nantinya yang akan disisipkan ke foto dan kemudian diekstrak kembali setelah kompresi untuk mengukur seberapa banyak yang hilang.
@@ -81,6 +83,8 @@ img_wm = (img_array & 0b11111110) | watermark
 ```
 Output: output_step4_embed.png
          wajah_watermarked.png
+![Embed Watermark](output/output_step4_embed.png)
+![Embed Watermark](output/wajah_watermarked.png)
 ```
 
 ---
@@ -101,6 +105,7 @@ LSB adalah frekuensi **sangat tinggi** (detail halus), sehingga quantization QF 
 
 ```
 Output: output_step5_dct.png
+![Kuantisasi](output/output_step5_dct.png)
 ```
 
 ---
@@ -117,6 +122,18 @@ Semakin rendah QF:
 Output: output_step6_kompresi.png
          output_step6_ukuran_file.png
          wajah_qf10.jpg ... wajah_qf100.jpg
+![Kompresi JPEG](output/output_step6_kompresi.png)
+## Hasil Kompresi JPEG per Quality Factor
+
+| QF 10 | QF 20 | QF 30 |
+|-------|-------|-------|
+| ![QF10](output/wajah_qf10.jpg) | ![QF20](output/wajah_qf20.jpg) | ![QF30](output/wajah_qf30.jpg) |
+
+| QF 50 | QF 70 | QF 90 | QF 100 |
+|-------|-------|-------|--------|
+| ![QF50](output/wajah_qf50.jpg) | ![QF70](output/wajah_qf70.jpg) | ![QF90](output/wajah_qf90.jpg) | ![QF100](output/wajah_qf100.jpg) |
+
+![Ukuran File](output/output_step6_ukuran_file.png)
 ```
 
 ---
@@ -136,6 +153,7 @@ BER = jumlah bit yang salah / total bit watermark
 
 ```
 Output: output_step7_ekstraksi.png
+![Ekstraksi Watermark](output/output_step7_ekstraksi.png)
 ```
 
 ---
@@ -150,6 +168,7 @@ Grafik garis yang menunjukkan hubungan antara QF dan BER. Garis merah putus-putu
 
 ```
 Output: output_step8_grafik_ber.png
+![Grafik BER vs Quality Factor](output/output_step8_grafik_ber.png)
 ```
 
 ---
