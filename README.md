@@ -44,9 +44,10 @@ Script mengecek apakah file foto ada di folder yang sama. Kalau tidak ditemukan,
 ### Step 2 — Load Gambar sebagai Grayscale
 Foto wajah dibuka lalu dikonversi ke mode **grayscale** (hitam-putih) menggunakan PIL. Hasilnya berupa array 2D NumPy di mana setiap elemen adalah nilai piksel 0–255.
 
+![Gambar Asli Grayscale](output/output_step2_gambar_asli.png)
 ```
 Output: output_step2_gambar_asli.png
-![Gambar Asli Grayscale](output/output_step2_gambar_asli.png)
+
 ```
 
 Kenapa grayscale? Karena watermarking LSB bekerja pada satu channel piksel. Foto berwarna (RGB) punya 3 channel, kalau dipakai semua jadi lebih kompleks — untuk praktikum ini cukup grayscale.
@@ -56,9 +57,10 @@ Kenapa grayscale? Karena watermarking LSB bekerja pada satu channel piksel. Foto
 ### Step 3 — Buat Watermark Biner Acak
 Dibuat sebuah array 64×64 pixel berisi nilai **0 dan 1** secara acak menggunakan `np.random.seed(42)`. `seed(42)` dipakai supaya watermark yang sama selalu terbentuk setiap kali program dijalankan (reproducible).
 
+![Watermarking Biner](output/output_step3_watermark.png)
 ```
 Output: output_step3_watermark.png
-![Watermarking Biner](output/output_step3_watermark.png)
+
 ```
 
 Watermark ini nantinya yang akan disisipkan ke foto dan kemudian diekstrak kembali setelah kompresi untuk mengukur seberapa banyak yang hilang.
@@ -79,12 +81,12 @@ Perubahan sebesar 1 ini **tidak terlihat oleh mata manusia**, tapi bisa dibaca o
 img_wm = (img_array & 0b11111110) | watermark
 # 0b11111110 = matikan bit terakhir, lalu OR dengan bit watermark
 ```
-
+![Embed Watermark](output/output_step4_embed.png)
+![Embed Watermark](output/wajah_watermarked.png)
 ```
 Output: output_step4_embed.png
          wajah_watermarked.png
-![Embed Watermark](output/output_step4_embed.png)
-![Embed Watermark](output/wajah_watermarked.png)
+
 ```
 
 ---
@@ -103,9 +105,10 @@ Quality Factor (QF) mengontrol tabel quantization:
 
 LSB adalah frekuensi **sangat tinggi** (detail halus), sehingga quantization QF rendah langsung menghapusnya.
 
+![Kuantisasi](output/output_step5_dct.png)
 ```
 Output: output_step5_dct.png
-![Kuantisasi](output/output_step5_dct.png)
+
 ```
 
 ---
@@ -122,6 +125,8 @@ Semakin rendah QF:
 Output: output_step6_kompresi.png
          output_step6_ukuran_file.png
          wajah_qf10.jpg ... wajah_qf100.jpg
+
+```
 ![Kompresi JPEG](output/output_step6_kompresi.png)
 ## Hasil Kompresi JPEG per Quality Factor
 
@@ -134,8 +139,6 @@ Output: output_step6_kompresi.png
 | ![QF50](output/wajah_qf50.jpg) | ![QF70](output/wajah_qf70.jpg) | ![QF90](output/wajah_qf90.jpg) | ![QF100](output/wajah_qf100.jpg) |
 
 ![Ukuran File](output/output_step6_ukuran_file.png)
-```
-
 ---
 
 ### Step 7 — Ekstraksi Watermark & Perhitungan BER
@@ -151,9 +154,10 @@ BER = jumlah bit yang salah / total bit watermark
 - BER = 0.50 → watermark acak total, sama seperti tebak-tebakan
 - BER < 0.10 → watermark masih bisa diekstrak (threshold praktis)
 
+![Ekstraksi Watermark](output/output_step7_ekstraksi.png)
 ```
 Output: output_step7_ekstraksi.png
-![Ekstraksi Watermark](output/output_step7_ekstraksi.png)
+
 ```
 
 ---
@@ -166,9 +170,9 @@ Grafik garis yang menunjukkan hubungan antara QF dan BER. Garis merah putus-putu
 - QF tinggi (70–100) → BER rendah → watermark **masih bisa** diekstrak
 - Catat QF berapa yang jadi batas (BER mulai ≥ 0.1)
 
+![Grafik BER vs Quality Factor](output/output_step8_embed.png)
 ```
 Output: output_step8_grafik_ber.png
-![Grafik BER vs Quality Factor](output/output_step8_grafik_ber.png)
 ```
 
 ---
