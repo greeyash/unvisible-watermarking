@@ -1,6 +1,6 @@
 # Watermarking — Evaluasi Ketahanan terhadap Kompresi JPEG
 
-Mata Kuliah: Sinyal & Multimedia
+Mata Kuliah: Sistem Multimedia
 
 ---
 
@@ -15,8 +15,9 @@ pip install numpy pillow matplotlib scipy
 ### Struktur folder
 ```
 project/
+├── input
+    ├── foto bila.jpeg
 ├── watermarking.py     ← script utama
-├── foto_wajah.jpg      ← foto wajahmu (taruh di sini)
 └── README.md
 ```
 

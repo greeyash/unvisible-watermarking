@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.fftpack import dct, idct
 import os
 
-FOTO_PATH = "foto bila.jpeg"   
+FOTO_PATH = "input/foto bila.jpeg"   
 WM_SIZE   = 64                 
 QF_LIST   = [10, 20, 30, 50, 70, 90, 100]  
 
