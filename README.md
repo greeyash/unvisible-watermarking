@@ -1,4 +1,4 @@
-# Watermarking — Evaluasi Ketahanan terhadap Kompresi JPEG
+# Watermarking
 
 Mata Kuliah: Sistem Multimedia
 
